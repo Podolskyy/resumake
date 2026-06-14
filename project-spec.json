@@ -1,0 +1,77 @@
+{
+  "project": {
+    "name": "ResuMake",
+    "description": "Resume Compiler & Visual QA Validator",
+    "targetAudience": "Fresh graduates seeking custom-tailored resumes for various computer science roles",
+    "portfolioAlignment": "IT Software Engineer (OMS) at Hilti (XML, XSLT, JS, SQL, PDF Composition, QA Automation)"
+  },
+  "userStory": {
+    "problem": "Fresh graduates apply to diverse roles and must tailor their resumes while maintaining a strict 1-page or 2-page print layout constraint, which is tedious to format manually.",
+    "solution": "Write career data once in an XML master pool. Use tag filtering and XSLT to compile tailored resumes dynamically, and run automated visual regression checks to verify layout boundaries."
+  },
+  "baseSectors": [
+    {
+      "tag": "qa",
+      "name": "Quality Assurance & Testing",
+      "keywords": ["Selenium", "Cypress", "TestNG", "test cases", "bugs", "functional testing", "regression", "automation"]
+    },
+    {
+      "tag": "backend",
+      "name": "Backend Development",
+      "keywords": ["Java", "Spring", "PHP", "SQL", "MySQL", "APIs", "backend", "database", "NodeJS"]
+    },
+    {
+      "tag": "frontend",
+      "name": "Frontend Development",
+      "keywords": ["HTML", "CSS", "Figma", "UI/UX", "layout", "design", "frontend", "React", "web-based"]
+    },
+    {
+      "tag": "mobile",
+      "name": "Mobile Development",
+      "keywords": ["Flutter", "Android Studio", "mobile", "cross-platform"]
+    },
+    {
+      "tag": "iot",
+      "name": "Internet of Things (IoT)",
+      "keywords": ["Arduino", "ESP32", "sensors", "DHT11", "PIR", "ultrasonic", "hardware", "IoT"]
+    },
+    {
+      "tag": "ai-ml",
+      "name": "Artificial Intelligence & ML",
+      "keywords": ["Gemini", "Claude", "LLM", "Prompting", "Agentic", "OpenCV", "AI", "detection"]
+    }
+  ],
+  "features": {
+    "inputInterface": {
+      "type": "Interactive Form Editor",
+      "behavior": "Users input data via UI forms. The app automatically maps inputs to XML in the background."
+    },
+    "smartAutoTagging": {
+      "type": "Regex Keyword Scanner",
+      "behavior": "Runs real-time keyword scanning on typed text and suggests matching category tags."
+    },
+    "dynamicFiltering": {
+      "type": "XSLT Parameter Filtering",
+      "behavior": "Passes selected tag checkboxes as parameters into the XSLT compiler to selectively display bullet points."
+    },
+    "visualLayoutCheck": {
+      "type": "Pixelmatch Image Diff",
+      "behavior": "Captures a layout screenshot using Puppeteer. Validates the height against user-selected 1-page or 2-page limits, highlighting spillovers in red."
+    },
+    "distribution": {
+      "channels": [
+        "Local PDF Archiving (/archive/{customer_id}/{filename}.pdf)",
+        "Mock Email Copy Dispatch with PDF Attachment",
+        "SQLite Log History Database"
+      ]
+    }
+  },
+  "resumeFields": {
+    "personalHeader": ["fullName", "title", "location", "email", "phone", "linkedin", "github", "targetPosition", "startDate"],
+    "experience": ["company", "role", "dateRange", "bullets", "tags"],
+    "projects": ["projectName", "technologies", "date", "bullets", "tags"],
+    "education": ["institution", "location", "degree", "cgpa", "dates", "specialisation", "coursework"],
+    "skills": ["programmingLanguages", "technologies", "frameworks", "ai", "devops", "softwareEngineering"],
+    "additional": ["awards", "certifications", "languages", "references"]
+  }
+}

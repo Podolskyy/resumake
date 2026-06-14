@@ -1,0 +1,8 @@
+node_modules/
+*.db
+temp/
+archive/
+golden/
+diff/
+output/
+.env
