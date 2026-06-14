@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResuMake — Resume Compiler & Visual QA Validator</title>
+  <meta name="description" content="Build, tailor, and validate your resume with XML/XSLT compilation and automated visual layout checks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glass-bg"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="logo-area">
+        <span class="logo-icon">📄</span>
+        <span class="logo-accent">Resu</span><span class="logo-main">Make</span>
+        <span class="logo-tag">COMPILER</span>
+      </div>
+      <div class="header-actions">
+        <select id="page-limit" class="select-input">
+          <option value="1">1-Page Limit</option>
+          <option value="2" selected>2-Page Limit</option>
+        </select>
+        <button id="btn-compile" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+          Compile Resume
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+      <!-- Left: Form Editor -->
+      <section class="panel panel-left" id="editor-panel">
+        <div class="panel-header">
+          <h2>Resume Editor</h2>
+          <div class="tab-nav">
+            <button class="tab-btn active" data-section="personal">Personal</button>
+            <button class="tab-btn" data-section="experience">Experience</button>
+            <button class="tab-btn" data-section="projects">Projects</button>
+            <button class="tab-btn" data-section="education">Education</button>
+            <button class="tab-btn" data-section="skills">Skills</button>
+            <button class="tab-btn" data-section="extras">Extras</button>
+          </div>
+        </div>
+
+        <div class="form-body" id="form-body">
+          <!-- Personal Info Section -->
+          <div class="form-section active" id="section-personal">
+            <div class="field-group">
+              <label>Full Name *</label>
+              <input type="text" id="fullName" placeholder="e.g. Wan Muhammad Ikmal">
+            </div>
+            <div class="field-group">
+              <label>Professional Title</label>
+              <input type="text" id="title" placeholder="e.g. Computer Science Fresh Graduate">
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label>Email *</label>
+                <input type="email" id="email" placeholder="your@email.com">
+              </div>
+              <div class="field-group">
+                <label>Phone *</label>
+                <input type="text" id="phone" placeholder="+60 123-456 7890">
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Location</label>
+              <input type="text" id="location" placeholder="e.g. Kajang, Selangor">
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label>LinkedIn</label>
+                <input type="text" id="linkedin" placeholder="linkedin.com/in/username">
+              </div>
+              <div class="field-group">
+                <label>GitHub</label>
+                <input type="text" id="github" placeholder="github.com/username">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label>Target Position</label>
+                <input type="text" id="targetPosition" placeholder="e.g. Software Engineer / QA">
+              </div>
+              <div class="field-group">
+                <label>Available From</label>
+                <input type="text" id="startDate" placeholder="e.g. 2 October 2026">
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience Section -->
+          <div class="form-section" id="section-experience">
+            <div class="dynamic-list" id="experience-list"></div>
+            <button class="btn btn-add" id="btn-add-experience">+ Add Experience</button>
+          </div>
+
+          <!-- Projects Section -->
+          <div class="form-section" id="section-projects">
+            <div class="dynamic-list" id="project-list"></div>
+            <button class="btn btn-add" id="btn-add-project">+ Add Project</button>
+          </div>
+
+          <!-- Education Section -->
+          <div class="form-section" id="section-education">
+            <div class="field-group">
+              <label>Institution *</label>
+              <input type="text" id="edu-institution" placeholder="e.g. Universiti Utara Malaysia (UUM)">
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label>Location</label>
+                <input type="text" id="edu-location" placeholder="e.g. Sintok, Kedah">
+              </div>
+              <div class="field-group">
+                <label>CGPA</label>
+                <input type="text" id="edu-cgpa" placeholder="e.g. 3.67/4.00">
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Degree *</label>
+              <input type="text" id="edu-degree" placeholder="e.g. Bachelor of Computer Science with Honours">
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label>Dates</label>
+                <input type="text" id="edu-dates" placeholder="e.g. October 2022 - October 2026">
+              </div>
+              <div class="field-group">
+                <label>Specialisation</label>
+                <input type="text" id="edu-specialisation" placeholder="e.g. Human-Centred Computing">
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Relevant Coursework (comma-separated)</label>
+              <input type="text" id="edu-coursework" placeholder="e.g. Data Structures, Software Engineering, Database Systems">
+            </div>
+          </div>
+
+          <!-- Skills Section -->
+          <div class="form-section" id="section-skills">
+            <div class="dynamic-list" id="skills-list"></div>
+            <button class="btn btn-add" id="btn-add-skill-category">+ Add Skill Category</button>
+          </div>
+
+          <!-- Extras Section -->
+          <div class="form-section" id="section-extras">
+            <h3 class="sub-heading">Awards & Recognition</h3>
+            <div class="dynamic-list" id="awards-list"></div>
+            <button class="btn btn-add" id="btn-add-award">+ Add Award</button>
+
+            <h3 class="sub-heading">Certifications</h3>
+            <div class="dynamic-list" id="certs-list"></div>
+            <button class="btn btn-add" id="btn-add-cert">+ Add Certification</button>
+
+            <h3 class="sub-heading">Languages</h3>
+            <div class="field-group">
+              <input type="text" id="languages" placeholder="e.g. Malay (Native), English (Expert - MUET Band 5)">
+            </div>
+
+            <h3 class="sub-heading">References</h3>
+            <div class="dynamic-list" id="refs-list"></div>
+            <button class="btn btn-add" id="btn-add-ref">+ Add Reference</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Results Inspector -->
+      <section class="panel panel-right" id="results-panel">
+        <!-- Tag Filter Bar -->
+        <div class="tag-filter-bar">
+          <h3>Active Tag Filters</h3>
+          <p class="tag-hint">Uncheck tags to exclude matching content from the compiled resume.</p>
+          <div class="tag-checkboxes" id="tag-checkboxes">
+            <label class="tag-check"><input type="checkbox" value="qa" checked><span class="tag-badge tag-qa">qa</span></label>
+            <label class="tag-check"><input type="checkbox" value="backend" checked><span class="tag-badge tag-backend">backend</span></label>
+            <label class="tag-check"><input type="checkbox" value="frontend" checked><span class="tag-badge tag-frontend">frontend</span></label>
+            <label class="tag-check"><input type="checkbox" value="mobile" checked><span class="tag-badge tag-mobile">mobile</span></label>
+            <label class="tag-check"><input type="checkbox" value="iot" checked><span class="tag-badge tag-iot">iot</span></label>
+            <label class="tag-check"><input type="checkbox" value="ai-ml" checked><span class="tag-badge tag-ai-ml">ai-ml</span></label>
+          </div>
+        </div>
+
+        <!-- Result Tabs -->
+        <div class="result-tabs">
+          <button class="result-tab active" data-tab="pdf">PDF Output</button>
+          <button class="result-tab" data-tab="xml">Raw XML</button>
+          <button class="result-tab" data-tab="qa">Visual QA</button>
+          <button class="result-tab" data-tab="history">Build History</button>
+        </div>
+
+        <div class="result-panels">
+          <!-- PDF Panel -->
+          <div class="result-panel active" id="rpanel-pdf">
+            <div class="placeholder-state" id="pdf-placeholder">
+              <div class="placeholder-icon">📄</div>
+              <h3>No resume compiled yet</h3>
+              <p>Fill in the form and click <strong>Compile Resume</strong> to generate your PDF.</p>
+            </div>
+            <div class="pdf-result" id="pdf-result" style="display:none;">
+              <div class="status-banner" id="status-banner"></div>
+              <iframe id="pdf-iframe" src=""></iframe>
+              <div class="pdf-actions">
+                <a id="btn-download" href="#" target="_blank" class="btn btn-secondary">⬇ Download PDF</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- XML Panel -->
+          <div class="result-panel" id="rpanel-xml">
+            <pre><code id="xml-code">Compile a resume to see the generated XML here.</code></pre>
+          </div>
+
+          <!-- QA Panel -->
+          <div class="result-panel" id="rpanel-qa">
+            <div class="placeholder-state" id="qa-placeholder">
+              <div class="placeholder-icon">🔍</div>
+              <h3>Visual QA results will appear here</h3>
+              <p>After compilation, the layout screenshot and any overflow diff will be displayed.</p>
+            </div>
+            <div class="qa-result" id="qa-result" style="display:none;">
+              <div class="qa-grid">
+                <div class="qa-card">
+                  <h4>Layout Screenshot</h4>
+                  <div class="qa-img-wrapper"><img id="img-screenshot" src="" alt="Layout"></div>
+                </div>
+                <div class="qa-card" id="diff-card" style="display:none;">
+                  <h4>Overflow Highlight</h4>
+                  <div class="qa-img-wrapper diff-wrapper"><img id="img-diff" src="" alt="Diff"></div>
+                  <p class="diff-notice">Red zone indicates content that exceeds the page boundary.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- History Panel -->
+          <div class="result-panel" id="rpanel-history">
+            <div class="history-list" id="history-list">
+              <p class="muted">No compilation history yet.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Compile Loading Overlay -->
+  <div class="compile-overlay" id="compile-overlay" style="display:none;">
+    <div class="spinner"></div>
+    <p>Compiling your resume...</p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

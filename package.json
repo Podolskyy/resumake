@@ -1,13 +1,32 @@
 {
   "name": "resumake",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Resume Compiler & Visual QA Validator — XML/XSLT document composition with automated layout regression testing.",
+  "main": "src/app.js",
   "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+  "keywords": [
+    "resume",
+    "xml",
+    "xslt",
+    "pdf",
+    "puppeteer",
+    "visual-regression",
+    "oms"
+  ],
+  "author": "Wan Ikmal",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1",
+    "pixelmatch": "^7.2.0",
+    "pngjs": "^7.0.0",
+    "puppeteer": "^25.1.0",
+    "sqlite3": "^6.0.1",
+    "xml2js": "^0.6.2",
+    "xslt-processor": "^5.0.11"
+  }
 }
